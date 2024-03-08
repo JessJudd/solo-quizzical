@@ -6,11 +6,11 @@ import { useState } from "react";
 
 // export const QuizScreen = ({ answersOnly, setAnswersOnly, quizData }) => {
 export const QuizScreen = ({ quizData }) => {
-  const [answerScreen, setanswerScreen] = useState({
-    isCheckAnswerList: false,
-    userAnswerList: [],
-  });
-  console.log("userAnswerList", userAnswerList);
+  // const [answerScreen, setanswerScreen] = useState({
+  //   isCheckAnswerList: false,
+  //   userAnswerList: [],
+  // });
+  const [userAnswerList, setUserAnswerList] = useState({});
   console.log("QuizScreen rendered");
 
   // const checkAnswers = () => {
