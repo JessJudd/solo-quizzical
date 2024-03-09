@@ -4,6 +4,7 @@ import { nanoid } from "nanoid";
 import { useState, useCallback, useMemo } from "react";
 
 import { TriviaAnswers } from "./TriviaAnswers.jsx";
+import { TriviaAnswerItem } from "./TriviaAnswerItem.jsx";
 
 // export const TriviaQuestion = ({
 //   answersOnly,
@@ -14,13 +15,16 @@ import { TriviaAnswers } from "./TriviaAnswers.jsx";
 export const TriviaQuestion = ({
   // answersOnly,
   // setAnswersOnly,
-  setUserAnswerList,
-  quizItem,
-  userAnswerList,
+  answerScreen,
+  correctAnswer,
+  questionId,
+  questionText,
+  setAnswerScreen,
+  shuffledAnswerList,
   // index,
 }) => {
   // const id = nanoid();
-  const { correctAnswerItem, id, question, shuffledAnswerList } = quizItem;
+  // const { correctAnswerItem, id, question, shuffledAnswerList } = quizItem;
 
   console.log("TriviaQuestion rendered");
 
@@ -55,72 +59,25 @@ export const TriviaQuestion = ({
   //   </section>
   // );
 
-  const handleChange = (event) => {
-    console.log("[fx]handleChange()");
-    const { value } = event.target;
-
-    const userAnswerListNew = structuredClone(userAnswerList);
-
-    if (userAnswerList[id]) {
-      userAnswerListNew[id].userAnswer = value;
-    } else {
-      userAnswerListNew[id] = {
-        userAnswer: value,
-        isCorrect: false,
-      };
-    }
-
-    setUserAnswerList(userAnswerListNew);
-
-    // const newAnswers = [...answersOnly];
-    // newAnswers[index] = userAnswer;
-    // setAnswersOnly(newAnswers);
-    // console.log("answersOnly: ", answersOnly);
-    // set value as user_answer in answersOnly
-  };
-
-  console.log("userAnswerList QUESTION", userAnswerList);
-  console.log("id QUESTION", id);
-  console.log("userAnswerList[id]?.isCorrect", userAnswerList[id]?.isCorrect);
   const triviaAnswerDisplay = shuffledAnswerList.map(
-    (shuffledAnswerItem, index) => {
+    (shuffledAnswerItem, answerId) => {
       return (
-        // <div className="quiz-answer-single" key={index}>
-        <div
-          className={`quiz-answer-single ${
-            (userAnswerList[id]?.userAnswer === shuffledAnswerItem &&
-              userAnswerList[id]?.isCorrect) ||
-            (userAnswerList[id]?.correctAnswerItem === shuffledAnswerItem &&
-              shuffledAnswerItem)
-              ? "correct-class"
-              : "incorrect-class"
-          }`}
-          key={index}
-        >
-          <input
-            className="answer-input"
-            id={`question-${id}-answer${index}`}
-            name={`question-${id}`}
-            type="radio"
-            value={shuffledAnswerItem}
-            // checked={answersOnly[index].user_answer === answer ? true : false}
-            onChange={(event) => handleChange(event)}
-          />
-          <label
-            htmlFor={`question-${id}-answer${index}`}
-            className="answer-label"
-            name={`question-${id}`}
-          >
-            {shuffledAnswerItem}
-          </label>
-        </div>
+        <TriviaAnswerItem
+          answerId={answerId}
+          answerScreen={answerScreen}
+          correctAnswer={correctAnswer}
+          key={answerId}
+          questionId={questionId}
+          setAnswerScreen={setAnswerScreen}
+          shuffledAnswerItem={shuffledAnswerItem}
+        />
       );
     }
   );
 
   return (
     <section className="quiz-item">
-      <h4 className="quiz-question">{he.decode(question)}</h4>
+      <h4 className="quiz-question">{he.decode(questionText)}</h4>
       <div className="quiz-answers">{triviaAnswerDisplay}</div>
       {/* <TriviaAnswers
         index={index}

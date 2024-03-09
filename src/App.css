@@ -1,9 +1,9 @@
 :root {
-  --purple: #4D5B9E;
+  --purple: #4d5b9e;
   --darkPurple: #293264;
-  --paleGray: #DBDEF0;
-  --primaryLight: #F5F7FB;
-  --altLight: #D6DBF5;
+  --paleGray: #dbdef0;
+  --primaryLight: #f5f7fb;
+  --altLight: #d6dbf5;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -20,45 +20,44 @@
 }
 
 .screen {
-  text-align:center;
+  text-align: center;
 }
 .screen.screen--quiz {
   /* padding:40px 75px; */
 }
 
 .button {
-  background-color:var(--purple);
-  border-radius:15px;
-  color:var(--primaryLight);
+  background-color: var(--purple);
+  border-radius: 15px;
+  color: var(--primaryLight);
 }
 .button.button--start {
-  margin-top:30px;
-  max-width:195px;
+  margin-top: 30px;
+  max-width: 195px;
   padding: 20px 28px;
-  width:100%;
+  width: 100%;
 }
 .button.button--quiz {
-  margin-top:20px;
+  margin-top: 20px;
   padding: 12px 22px;
-  width:100%;
+  width: 100%;
 }
 
 .start-header,
 .start-blurb {
-  margin:0;
+  margin: 0;
 }
 .start-header + .start-blurb {
-  padding-top:12px;
+  padding-top: 12px;
 }
 .start-header {
-  color:var(--darkPurple);
-  font-size:calc(32/16 * 1em);
+  color: var(--darkPurple);
+  font-size: calc(32 / 16 * 1em);
 }
 
-
 .quiz-item {
-  padding-bottom:15px;
-  text-align:left;
+  padding-bottom: 15px;
+  text-align: left;
 }
 .quiz-item:last-of-type {
   border-bottom: thin solid var(--paleGray);
@@ -71,91 +70,90 @@
   flex-direction:row;
   flex-wrap: wrap;
   gap:13px; */
-  display:grid;
+  display: grid;
   grid-template: auto / repeat(2, 1fr);
-  gap:10px;
+  gap: 10px;
 }
 .quiz-answer-single .answer-input:checked + .answer-label {
-  background-color:var(--altLight);
-  border-color:var(--altLight);
-  color:var(--darkPurple);
+  background-color: var(--altLight);
+  border-color: var(--altLight);
+  color: var(--darkPurple);
 }
 
 .quiz-answer-single.correct-class .answer-input + .answer-label {
-  background-color:green;
-  border-color:darkgreen;
-  color:white;
+  background-color: green;
+  border-color: darkgreen;
+  color: white;
 }
-/* .quiz-answer-single.incorrect-class .answer-input + .answer-label {
-  background-color:red;
-  color:white;
-} */
+.quiz-answer-single.incorrect-class .answer-input + .answer-label {
+  background-color: red;
+  color: white;
+}
 
 .quiz-answer-single .answer-input {
-  display:none;
+  display: none;
 }
 .quiz-answer-single .answer-label {
-  background-color:var(--primaryLight);
+  background-color: var(--primaryLight);
   border: thin solid var(--darkPurple);
-  border-radius:10px;
+  border-radius: 10px;
   color: var(--darkPurple);
-  cursor:pointer;
-  display:inline-block;
-  min-width:66px;
-  text-align:center;
+  cursor: pointer;
+  display: inline-block;
+  min-width: 66px;
+  text-align: center;
 
-  width:100%;
-  padding:5px 0;
+  width: 100%;
+  padding: 5px 0;
 }
 
 .quiz-results {
-  display:flex;
-  flex-direction:row;
-  justify-content:space-between;
-  align-items:center;
-  padding:0 22px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 22px;
 }
 .results-heading {
-  font-size:calc(13/16 * 1em);
-  font-weight:bold;
-  flex-grow:1;
-  text-align:center;
+  font-size: calc(13 / 16 * 1em);
+  font-weight: bold;
+  flex-grow: 1;
+  text-align: center;
 }
 
-@media screen and (min-width:810px){
+@media screen and (min-width: 810px) {
   .quiz-question {
-    line-height:1.2;
+    line-height: 1.2;
   }
   .quiz-answers {
-    display:flex;
-    flex-direction:row;
-    gap:13px;
+    display: flex;
+    flex-direction: row;
+    gap: 13px;
   }
   .quiz-answer-single .answer-label {
-    padding:5px 15px;
+    padding: 5px 15px;
   }
   .button.button--quiz {
-    width:initial;
+    width: initial;
   }
 }
 
-
-@media screen and (min-width:1280px){
+@media screen and (min-width: 1280px) {
   .screen.screen--quiz {
-    padding:40px 75px;
+    padding: 40px 75px;
   }
   .start-header {
-    font-size:calc(52/16 * 1em);
+    font-size: calc(52 / 16 * 1em);
   }
   .start-blurb,
   .button.button--start,
   .button.button--quiz {
-    font-size:calc(22/16 * 1em);
+    font-size: calc(22 / 16 * 1em);
   }
   .quiz-question {
-    font-size:calc(20/16 * 1em);
+    font-size: calc(20 / 16 * 1em);
   }
   .quiz-answer-single .answer-label {
-    font-size:calc(18/16 * 1em);
+    font-size: calc(18 / 16 * 1em);
   }
 }

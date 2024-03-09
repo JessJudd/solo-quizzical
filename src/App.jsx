@@ -90,9 +90,9 @@ function App() {
         );
 
         return {
-          correctAnswerItem: he.decode(correct_answer),
-          id: index,
-          question,
+          correctAnswer: he.decode(correct_answer),
+          questionId: index,
+          questionText: question,
           shuffledAnswerList,
         };
       }
