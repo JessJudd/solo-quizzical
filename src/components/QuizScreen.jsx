@@ -10,7 +10,10 @@ export const QuizScreen = ({ quizData }) => {
   //   isCheckAnswerList: false,
   //   userAnswerList: [],
   // });
-  const [userAnswerList, setUserAnswerList] = useState({});
+  const [answerScreen, setAnswerScreen] = useState({
+    isCheckAnswerList: false,
+    userAnswerList: [],
+  });
   console.log("QuizScreen rendered");
 
   // const checkAnswers = () => {
@@ -42,9 +45,11 @@ export const QuizScreen = ({ quizData }) => {
   // };
   const checkAnswers = () => {
     console.log("[checkAnswers]");
-    const userAnswerListNew = structuredClone(userAnswerList);
+    const answerScreenNew = structuredClone(answerScreen);
 
-    setUserAnswerList(userAnswerListNew.isCheckAnswerList === true);
+    answerScreenNew.isCheckAnswerList = true;
+
+    setAnswerScreen(answerScreenNew);
   };
 
   // const quizQuestions = quizData.map((quizItem, index) => {
@@ -61,20 +66,25 @@ export const QuizScreen = ({ quizData }) => {
   // });
   // const quizQuestions = quizData.map((quizItem, index) => {
 
-  const quizQuestions = quizData.map((quizItem) => {
-    // const id = nanoid();
-    return (
-      <TriviaQuestion
-        key={quizItem.id}
-        // answersOnly={answersOnly}
-        // setAnswersOnly={setAnswersOnly}
-        setUserAnswerList={setUserAnswerList}
-        userAnswerList={userAnswerList}
-        quizItem={quizItem}
-        // index={index}
-      />
-    );
-  });
+  const quizQuestions = quizData.map(
+    ({ correctAnswer, questionId, questionText, shuffledAnswerList }) => {
+      // const id = nanoid();
+      return (
+        <TriviaQuestion
+          // answersOnly={answersOnly}
+          // setAnswersOnly={setAnswersOnly}
+          answerScreen={answerScreen}
+          correctAnswer={correctAnswer}
+          key={questionId}
+          questionId={questionId}
+          questionText={questionText}
+          setAnswerScreen={setAnswerScreen}
+          shuffledAnswerList={shuffledAnswerList}
+          // index={index}
+        />
+      );
+    }
+  );
 
   // const quizElements = quizData.map((quizItem) => {
   //   i++;
