@@ -1,15 +1,12 @@
 :root {
   --purple: #4D5B9E;
   --darkPurple: #293264;
+  --brightPurple: #646cff;
   --paleGray: #DBDEF0;
   --primaryLight: #F5F7FB;
   --altLight: #D6DBF5;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --darkPurple: hsl(231, 42%, 58%);
-    --purple: hsl(230, 34%, 56%);
-  }
+  --correctAnswer: #94D7A2;
+  --wrongAnswer: #F8BCBC;
 }
 
 #root {
@@ -22,25 +19,34 @@
 .screen {
   text-align:center;
 }
-.screen.screen--quiz {
-  /* padding:40px 75px; */
-}
 
 .button {
   background-color:var(--purple);
   border-radius:15px;
   color:var(--primaryLight);
+  transition:.3s all ease-in-out;
+}
+.button:hover {
+  background-color: var(--brightPurple);
+  border-color:var(--brightPurple);
+  transform:scale(1.1);
+  transition:.3s all ease-in-out;
 }
 .button.button--start {
   margin-top:30px;
   max-width:195px;
-  padding: 20px 28px;
+  padding:20px 28px;
   width:100%;
 }
 .button.button--quiz {
   margin-top:20px;
-  padding: 12px 22px;
+  padding:12px 22px;
+  transition:.3s all ease-in-out;
   width:100%;
+}
+.button.button--results {
+  font-size:calc(12/16 * 1em);
+  padding:10px 22px;
 }
 
 .start-header,
@@ -67,29 +73,35 @@
   border-top: thin solid var(--paleGray);
 }
 .quiz-answers {
-  /* display:flex;
-  flex-direction:row;
-  flex-wrap: wrap;
-  gap:13px; */
   display:grid;
   grid-template: auto / repeat(2, 1fr);
   gap:10px;
+}
+.quiz-answers.quiz-validated .quiz-answer-single:not(.correct-answer) .answer-label {
+  opacity:50%;
+}
+.quiz-answers.quiz-validated .quiz-answer-single .answer-label {
+  cursor:default;
 }
 .quiz-answer-single .answer-input:checked + .answer-label {
   background-color:var(--altLight);
   border-color:var(--altLight);
   color:var(--darkPurple);
+  transition:.3s all ease-in-out;
+}
+.quiz-answers:not(.quiz-validated) .quiz-answer-single:hover .answer-label {
+  background-color:var(--altLight);
+  transition:.3s all ease-in-out;
 }
 
-.quiz-answer-single.correct-class .answer-input + .answer-label {
-  background-color:green;
-  border-color:darkgreen;
-  color:white;
+.quiz-answer-single.correct-answer .answer-input + .answer-label {
+  background-color:var(--correctAnswer);
+  border-color:var(--correctAnswer);
 }
-/* .quiz-answer-single.incorrect-class .answer-input + .answer-label {
-  background-color:red;
-  color:white;
-} */
+.quiz-answer-single.wrong-answer .answer-input + .answer-label {
+  background-color:var(--wrongAnswer);
+  border-color:var(--wrongAnswer);
+}
 
 .quiz-answer-single .answer-input {
   display:none;
@@ -101,8 +113,10 @@
   color: var(--darkPurple);
   cursor:pointer;
   display:inline-block;
+  line-height: 1.2;
   min-width:66px;
   text-align:center;
+  transition:.3s all ease-in-out;
 
   width:100%;
   padding:5px 0;
@@ -110,19 +124,19 @@
 
 .quiz-results {
   display:flex;
-  flex-direction:row;
-  justify-content:space-between;
+  flex-direction:column;
+  /* justify-content:space-between;
+  justify-content: center;
   align-items:center;
-  padding:0 22px;
+  padding:20px 22px; */
 }
 .results-heading {
-  font-size:calc(13/16 * 1em);
-  font-weight:bold;
-  flex-grow:1;
+  font-weight:bold;  
   text-align:center;
 }
 
-@media screen and (min-width:810px){
+/* @media screen and (min-width:810px){ */
+@media screen and (min-width:550px){
   .quiz-question {
     line-height:1.2;
   }
@@ -136,6 +150,18 @@
   }
   .button.button--quiz {
     width:initial;
+  }
+
+  .quiz-results {
+    flex-direction:row;
+    justify-content:space-between;
+    justify-content: center;
+    align-items:center;
+    padding:20px 22px;
+  }
+  .results-heading {
+    max-width:65%;
+    flex-grow:1;
   }
 }
 
@@ -152,10 +178,21 @@
   .button.button--quiz {
     font-size:calc(22/16 * 1em);
   }
-  .quiz-question {
+  .quiz-question,
+  .quiz-results {
     font-size:calc(20/16 * 1em);
   }
-  .quiz-answer-single .answer-label {
+  .quiz-answer-single .answer-label,
+  .button.button--results {
     font-size:calc(18/16 * 1em);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .start-header {
+    color:var(--purple);
+  }
+  .quiz-answers.quiz-validated .quiz-answer-single:not(.correct-answer) .answer-label {
+    opacity:60%;
   }
 }
