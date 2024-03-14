@@ -58,7 +58,6 @@ function App() {
     async function startFetching() {
       const json = await fetchQuizData();
       if (!ignore) {
-        console.log(json);
         setupQuiz(json);
       }
     }

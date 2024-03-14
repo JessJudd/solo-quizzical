@@ -18,12 +18,8 @@ export const QuizScreen = ({
 
   const checkAnswers = () => {
     const userAnswerListNew = structuredClone(userAnswerList);
-    console.log("userAnswerListNew: ", userAnswerListNew);
 
     userAnswerListNew.forEach(({ userAnswer }, index) => {
-      console.log("[index]: ", [index]);
-      console.log("userAnswerList[index]: ", userAnswerList[index]);
-
       if (userAnswer === quizData[index].correctAnswerItem) {
         userAnswerListNew[index].isCorrect = true;
       } else {
